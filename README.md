@@ -1,2 +1,4 @@
-# web-420
- Coursework for Bellevue University's WEB 420: RESTful APIs
+# WEB 420: RESTful APIs
+##  Contributors
+- Professor Krasso
+- Erin Brady
