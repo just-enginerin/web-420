@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Person API
+  description: |-
+    This is a Person Server based on the OpenAPI 3.0 specification.
+  version: 1.0.11
+tags:
+  - name: Persons
+paths:
+  /persons:
+    get:
+      tags:
+        - Persons
+      summary: Returns a list of person documents
+      description: API for returning a list of persons from MongoDB Atlas.
+      responses:
+        '200':
+          description: Person documents
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB exception
+    post:
+      tags:
+        - Persons
+      summary: Create a new person object
+      description: API for adding new person objects
+      requestBody:
+        description: Person's information
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  firstName:
+                    type: string
+                    description: The new person's first name
+                  lastName:
+                    type: string
+                    description: The new person's last name
+                  roles:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                  dependents:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                          firstName:
+                            type: string
+                            description: The dependent's first name
+                          lastName:
+                            type: string
+                            description: The dependent's last name
+                  birthDate:
+                    type: string
+                    description: The new Person's birth date
+      responses:
+        '200':
+          description: Person added
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB exception

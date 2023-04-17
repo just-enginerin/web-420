@@ -15,6 +15,7 @@ const swaggerUi = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
 const mongoose = require("mongoose")
 const composerAPI = require('./routes/brady-composer-routes')
+const personAPI = require('./routes/brady-person-routes')
 
 const app = express()
 app.set('port', process.env.PORT || 3000)
@@ -49,6 +50,7 @@ const openApiSpecification = swaggerJsDoc(options)
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpecification))
 app.use('/', composerAPI)
+app.use('/', personAPI)
 
 http.createServer(app).listen(app.get('port'), () => {
     console.log(`Application started and listening on port ${app.get('port')}`)

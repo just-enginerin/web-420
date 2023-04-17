@@ -13,7 +13,7 @@ const Composer = require('../models/brady-composer')
 
 // Test Router is working
 router.get('/', function (req, res, next) {
-    console.log("Router Working")
+    console.log("Composer Router Working")
     res.end()
 })
  
