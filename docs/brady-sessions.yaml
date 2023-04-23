@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Session API
+  description: |-
+    This is a User Session Server based on the OpenAPI 3.0 specification.
+  version: 1.0.11
+tags:
+  - name: Sessions
+paths:
+  /api/signup:
+    post:
+      tags:
+        - Sessions
+      summary: Registers a new user
+      description: API for registering a new user.
+      requestBody:
+        description: User's registration information
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: The username requested by the new user.
+                password:
+                  type: string
+                  description: The password requested by the new user.
+                emailAddress:
+                  type: string
+                  description: The email address of the new user.
+      responses:
+        '200':
+          description: Registered user.
+        '401':
+          description: Username is already in use.
+        '500':
+          description: Server exception.
+        '501':
+          description: MongoDB exception.
+  /api/login:
+    post:
+      tags:
+        - Sessions
+      summary: Logs in a user
+      description: API for logging in a user.
+      requestBody:
+        description: User's login information
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: The username requested by the new user.
+                password:
+                  type: string
+                  description: The password requested by the new user.
+      responses:
+        '200':
+          description: User logged in.
+        '401':
+          description: Invalid username and/or password.
+        '500':
+          description: Server exception.
+        '501':
+          description: MongoDB exception.
