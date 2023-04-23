@@ -7,7 +7,7 @@ info:
 tags:
   - name: Persons
 paths:
-  /persons:
+  /api/persons:
     get:
       tags:
         - Persons

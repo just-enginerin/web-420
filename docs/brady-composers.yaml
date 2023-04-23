@@ -7,7 +7,7 @@ info:
 tags:
   - name: Composers
 paths:
-  /composers:
+  /api/composers:
     get:
       tags:
         - Composers
@@ -45,7 +45,7 @@ paths:
           description: Server exception
         '501':
           description: MongoDB exception
-  /composers/{id}:
+  /api/composers/{id}:
     get:
       tags:
         - Composers

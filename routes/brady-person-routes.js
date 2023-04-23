@@ -12,7 +12,7 @@ const router = express.Router()
 const Person = require('../models/brady-person')
 
 // Test Router is working
-router.get('/', function (req, res, next) {
+router.get('/api', function (req, res, next) {
     console.log("Person Router Working")
     res.end()
 })
@@ -74,7 +74,7 @@ router.get('/persons', async(req, res) => {
  * tags:
  *   - name: Persons
  * paths:
- *   /Persons:
+ *   /api/persons:
  *   post:
  *     tags:
  *       - Persons

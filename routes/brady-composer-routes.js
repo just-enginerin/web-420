@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
  * tags:
  *   - name: Composers
  * paths:
- *   /composers:
+ *   /api/composers:
  *     get:
  *       tags:
  *         - Composers
@@ -75,7 +75,7 @@ router.get('/composers', async(req, res) => {
  * tags:
  *   - name: Composers
  * paths:
- * /composers/{id}:
+ * /api/composers/{id}:
  *   get:
  *     tags:
  *       - Composers
@@ -128,7 +128,7 @@ router.get('/composers/:id', async(req, res) => {
  * tags:
  *   - name: Composers
  * paths:
- *   /composers:
+ *   /api/composers:
  *   post:
  *     tags:
  *       - Composers

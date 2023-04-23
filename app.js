@@ -49,8 +49,8 @@ const openApiSpecification = swaggerJsDoc(options)
 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpecification))
-app.use('/', composerAPI)
-app.use('/', personAPI)
+app.use('/api', composerAPI)
+app.use('/api', personAPI)
 
 http.createServer(app).listen(app.get('port'), () => {
     console.log(`Application started and listening on port ${app.get('port')}`)
