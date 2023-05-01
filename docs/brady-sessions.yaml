@@ -20,7 +20,7 @@ paths:
             schema:
               type: object
               properties:
-                userName:
+                username:
                   type: string
                   description: The username requested by the new user.
                 password:
@@ -51,7 +51,7 @@ paths:
             schema:
               type: object
               properties:
-                userName:
+                username:
                   type: string
                   description: The username requested by the new user.
                 password:

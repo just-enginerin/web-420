@@ -12,7 +12,7 @@ const Schema = mongoose.Schema
 
 // Initialize Composer Schema
 const userSchema = new Schema({
-    userName: { type: String },
+    username: { type: String },
     password: { type: String },
     emailAddress: { type: Array }
 });

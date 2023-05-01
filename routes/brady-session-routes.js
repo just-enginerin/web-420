@@ -37,7 +37,7 @@ paths:
             schema:
               type: object
               properties:
-                userName:
+                username:
                   type: string
                   description: The username requested by the new user.
                 password:
@@ -60,7 +60,7 @@ paths:
 router.post('/signup', async(req, res) => {
     try {
         // Search the Users collection to determine whether the user is already registered.
-        User.findOne({'userName': req.body.userName}, function(mongoError, user) {
+        User.findOne({'username': req.body.username}, function(mongoError, user) {
             if (mongoError) {
                 console.log(mongoError)
                 res.status(501).send({
@@ -75,7 +75,7 @@ router.post('/signup', async(req, res) => {
                 // If the user is not already registered, encrypt their password before registering them in the Users collection.
                 let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds)
                 let newRegisteredUser = {
-                    userName: req.body.userName,
+                    username: req.body.username,
                     password: hashedPassword,
                     emailAddress: req.body.emailAddress
                 }
@@ -116,7 +116,7 @@ paths:
             schema:
               type: object
               properties:
-                userName:
+                username:
                   type: string
                   description: The username requested by the new user.
                 password:
@@ -136,7 +136,7 @@ paths:
 router.post('/login', async(req, res) => {
     try {
         // Search the users collection to determine whether the user is already registered.
-        User.findOne({'userName': req.body.userName}, function(mongoError, user) {
+        User.findOne({'username': req.body.username}, function(mongoError, user) {
             if (mongoError) {
                 console.log(mongoError)
                 res.status(501).send({
