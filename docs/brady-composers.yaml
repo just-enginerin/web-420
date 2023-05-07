@@ -50,7 +50,7 @@ paths:
       tags:
         - Composers
       summary: Returns a composer document
-      description: API for returning a single Composer object from MongoDB.
+      description: API for returning a single Composer document from MongoDB.
       parameters:
         - name: id
           in: path
@@ -61,6 +61,58 @@ paths:
       responses:
         '200':
           description: Composer document in JSON format.
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB exception
+    put:
+      tags:
+        - Composers
+      summary: Returns an updated composer document
+      description: API for updating a single Composer document from MongoDB.
+      parameters:
+        - name: id
+          in: path
+          description: The composerId requested by the user.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The updated first and last name of the composer.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Array of Composer documents
+        '401':
+          description: Invalid Composer ID
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB exception
+    delete:
+      tags:
+        - Composers
+      summary: Deletes a composer document
+      description: API for deleting a single Composer object by their ID.
+      parameters:
+        - name: id
+          in: path
+          description: The composerId to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Composer successfully deleted.
         '500':
           description: Server exception
         '501':
