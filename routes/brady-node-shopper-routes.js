@@ -60,7 +60,7 @@ router.post('/customers', async(req, res) => {
         const newCustomer = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            username: req.body.username,
+            userName: req.body.userName,
             invoices: []
         }
 
@@ -94,16 +94,16 @@ router.post('/customers', async(req, res) => {
  * tags:
  *   - name: Customers
  * paths:
- *   /api/customers/{username}/invoices:
+ *   /api/customers/{userName}/invoices:
  *   post:
  *     tags:
  *       - Customers
  *     summary: Create a new invoice object for a specific customer
  *     description: API for adding new invoice objects
  *     parameters:
- *      - name: username
+ *      - name: userName
  *        in: path
- *        description: username of customer creating the invoice.
+ *        description: userName of customer creating the invoice.
  *        required: true
  *        schema:
  *          type: string
@@ -138,7 +138,7 @@ router.post('/customers', async(req, res) => {
  *         description: MongoDB exception
 */
 
-router.post('/customers/{username}/invoices', async(req, res) => {
+router.post('/customers/:userName/invoices', async(req, res) => {
 
     const {
         subtotal,
@@ -149,8 +149,8 @@ router.post('/customers/{username}/invoices', async(req, res) => {
     } = req.body
 
     try {
-        // Query the customers collection to find the customer by their username.
-        Customer.findOne({'username': req.params.username}, function(mongoError, customer) {
+        // Query the customers collection to find the customer by their userName.
+        Customer.findOne({'userName': req.params.userName}, function(mongoError, customer) {
             if (mongoError) {
                 console.log(mongoError)
                 res.status(501).send({
@@ -199,16 +199,16 @@ router.post('/customers/{username}/invoices', async(req, res) => {
  * tags:
  *   - name: Customers
  * paths:
- * /api/customers/{username}/invoices:
+ * /api/customers/{userName}/invoices:
  *   get:
  *     tags:
  *       - Customers
  *     summary: Returns a list of invoices
  *     description: API for returning a list of Invoice objects from MongoDB.
  *     parameters:
- *       - name: username
+ *       - name: userName
  *         in: path
- *         description: The username of the Customer in which the list of invoices belongs to.
+ *         description: The userName of the Customer in which the list of invoices belongs to.
  *         required: true
  *         schema:
  *           type: string
@@ -220,10 +220,10 @@ router.post('/customers/{username}/invoices', async(req, res) => {
  *       '501':
  *         description: MongoDB exception
 */
-router.get('/customers/:username/invoices', async(req, res) => {
+router.get('/customers/:userName/invoices', async(req, res) => {
     try {
-        // Query the customers collection to find the customer by username.
-        Customer.findOne({'username': req.params.username}, function(mongoError, customer) {
+        // Query the customers collection to find the customer by userName.
+        Customer.findOne({'userName': req.params.userName}, function(mongoError, customer) {
             if (mongoError) {
                 console.log(mongoError)
                 res.status(500).send({
