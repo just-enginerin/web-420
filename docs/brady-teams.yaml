@@ -11,7 +11,7 @@ paths:
     get:
       tags:
         - Teams
-      summary: Returns a list of team documents
+      summary: Find all teams.
       description: API for returning a list of teams from MongoDB Atlas.
       responses:
         '200':
@@ -54,6 +54,27 @@ paths:
           description: Player document
         '401':
           description: Invalid teamId
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB exception
+    get:
+      tags:
+        - Teams
+      summary: Find All Players by Team ID
+      description: API for retrieving a list of player documents for a specified team.
+      parameters:
+        - name: id
+          in: path
+          description: The team ID whose players will be retrieved.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of player documents
+        '401':
+          description: 'Invalid teamId'
         '500':
           description: Server exception
         '501':

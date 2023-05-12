@@ -150,4 +150,55 @@ router.post('/teams/:id/players', async(req, res) => {
     }
 })
 
+/*
+ * findAllPlayersByTeamId
+ *   get:
+ *       tags:
+ *           - Teams
+ *       summary: Find All Players by Team ID
+ *       description: API for retrieving a list of player documents for a specified team.
+ *       parameters:
+ *           - name: id
+ *           in: path
+ *           description: The team ID whose players will be retrieved.
+ *           required: true
+ *           schema:
+ *               type: string
+ *       responses:
+ *           '200':
+ *           description: Array of player documents
+ *           '401':
+ *           description: 'Invalid teamId'
+ *           '500':
+ *           description: Server exception
+ *           '501':
+ *           description: MongoDB exception
+*/
+router.get('/teams/:id/players', async(req, res) => {
+    try {
+        // Query the teams collection to find the team by their id.
+        Team.findOne({'_id': req.params.id}, function(mongoError, team) {
+            if (mongoError) {
+                console.log(mongoError)
+                res.status(501).send({
+                    'message': `MongoDB Exception: ${mongoError}`
+                })
+            } else if (!team) {
+                res.status(401).send({
+                    'message': `Invalid teamId`
+                })
+            } else {
+                // Display all players for the designated team.
+                console.log(team)
+                res.json(team.players).toArray()
+            }
+        })
+    } catch (serverError) {
+        console.log(serverError)
+        res.status(500).send({
+            'message': `Server Exception: ${serverError.message}`
+        })
+    }
+})
+
 module.exports = router
