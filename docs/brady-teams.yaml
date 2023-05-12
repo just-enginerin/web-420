@@ -79,3 +79,25 @@ paths:
           description: Server exception
         '501':
           description: MongoDB exception
+  /api/teams/{id}:
+    delete:
+      tags:
+        - Teams
+      summary: Delete a Team by its ID.
+      description: API for deleting a single Team object by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: The teamId to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The team document that was deleted.
+        '401':
+          description: Invalid teamId
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB exception

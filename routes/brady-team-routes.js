@@ -150,7 +150,7 @@ router.post('/teams/:id/players', async(req, res) => {
     }
 })
 
-/*
+/**
  * findAllPlayersByTeamId
  *   get:
  *       tags:
@@ -198,6 +198,51 @@ router.get('/teams/:id/players', async(req, res) => {
         res.status(500).send({
             'message': `Server Exception: ${serverError.message}`
         })
+    }
+})
+
+/**
+ * deleteTeamById
+ * delete:
+ *    tags:
+ *      - Teams
+ *    summary: Delete a Team by its ID.
+ *    description: API for deleting a single Team object by its ID.
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: The teamId to delete.
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      '200':
+ *        description: The team document that was deleted.
+ *      '401':
+ *        description: Invalid teamId
+ *      '500':
+ *        description: Server exception
+ *      '501':
+ *        description: MongoDB exception
+*/
+router.delete('/teams/:id/', async(req, res) => {
+    try {
+        // Find the designated team by the params ID in MongoDB, and delete it.
+        Team.findByIdAndDelete(req.params.id, function(mongoError, team) {
+            if (mongoError) {
+                console.log(mongoError)
+                res.status(501).send({
+                    'message': `MongoDB Exception: ${mongoError}`
+                })
+            } else if (!team) {
+                res.status(401).send({ message: 'Invalid teamId' });
+            } else {
+                // If the team was successfully deleted, return the deleted team document.
+                res.status(200).json(team)
+            } 
+        })
+    } catch (serverError) {
+        res.status(500).send({ message: `Server exception: ${serverError}` });
     }
 })
 
