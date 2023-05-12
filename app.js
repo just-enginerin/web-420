@@ -18,6 +18,7 @@ const composerAPI = require('./routes/brady-composer-routes')
 const personAPI = require('./routes/brady-person-routes')
 const userAPI = require('./routes/brady-session-routes')
 const customerAPI = require('./routes/brady-node-shopper-routes')
+const teamAPI = require('./routes/brady-team-routes')
 
 const app = express()
 app.set('port', process.env.PORT || 3000)
@@ -55,6 +56,7 @@ app.use('/api', composerAPI)
 app.use('/api', personAPI)
 app.use('/api', userAPI)
 app.use('/api', customerAPI)
+app.use('/api', teamAPI)
 
 http.createServer(app).listen(app.get('port'), () => {
     console.log(`Application started and listening on port ${app.get('port')}`)
